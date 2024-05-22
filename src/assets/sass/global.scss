@@ -1,0 +1,35 @@
+@import 'fonts';
+@import 'root';
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    font-family: var(--font-lato);
+}
+
+div#root {
+    width: 100%;
+}
+  
+a {
+    font-weight: 500;
+    color: var(--color-dark);
+    text-decoration: inherit;
+}
+
+a:hover {
+    color: var(--color-dark-blue);
+}
+
+  
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
