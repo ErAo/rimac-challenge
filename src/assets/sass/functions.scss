@@ -1,4 +1,4 @@
-@function calc-rem($value-px) {
+@function toRem($value-px) {
     $value-em: calc($value-px / 16);
 
     @return $value-em*1rem;

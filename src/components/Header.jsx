@@ -6,10 +6,10 @@ export default function Header() {
     return (
         <header className='header'>
             <div className="container header__wrapper">
-                <a className="header__logo__link">
+                <a className="header__logo__link" href='/'>
                     <Img 
                         src="/img/logo.png" 
-                        alt="Logo" 
+                        alt="Logo RIMAC header" 
                         className="header__logo__img" 
                         breakpoints={[{ minWidth: 768, src: '/img/logo.png' }]}
                     />

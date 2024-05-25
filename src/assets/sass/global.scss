@@ -6,12 +6,27 @@ body {
     display: flex;
     place-items: center;
     font-family: var(--font-lato);
+    background: var(--color-light);
+    color: var(--color-dark);
 }
 
 div#root {
-    width: 100%;
+    width: 100%;    
+    display: grid;
+    grid-template-areas: 'header'
+                        'main' 
+                        'footer';
+    min-height: 100vh;
+    grid-auto-rows: max-content auto max-content;    
+    position: relative;
+    overflow: hidden;
+
+    main {
+        position: relative;
+    }
+    
 }
-  
+
 a {
     font-weight: 500;
     color: var(--color-dark);
@@ -30,6 +45,32 @@ a:hover {
 
 .container {
     width: 100%;
-    max-width: 1120px;
     margin: 0 auto;
+    max-width: 500px;
+}
+
+picture {
+    display: flex;
+}
+
+.tag {
+    font-size: toRem(12);
+    line-height: toRem(16);
+    font-weight: 700;
+    display: inline-flex;
+    background: var(--color-light-green);
+    padding: toRem(2) toRem(8);
+    border-radius: toRem(6);
+
+    &--gradient {
+        padding: toRem(4) toRem(8);
+        border-radius: toRem(4);
+        background: linear-gradient(90deg, var(--color-light-blue) 0%, var(--color-green) 100%);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 1120px;
+    }
 }
