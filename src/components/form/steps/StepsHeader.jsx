@@ -11,8 +11,8 @@ export default function StepsHeader({handleButton, progress, steps, step}) {
                 </button>
 
                 <div className="steps-header__block steps-header__block--desktop">
-                    {steps?.map(({step, active, handle, text}) => (
-                        <div className={`steps-header__block__step${active ? ' active' : ''}`} key={step}>
+                    {steps?.map(({step, active, handle, text, id}) => (
+                        <div className={`steps-header__block__step${active ? ' active' : ''}`} key={id}>
                             <button onClick={()=> handle(step)} className='steps-header__block__step__button'> 
                                 <span className="steps-header__block__step__number">{step}</span>
                                 {text}

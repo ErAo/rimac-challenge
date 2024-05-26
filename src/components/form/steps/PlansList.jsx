@@ -14,19 +14,24 @@ import { AppContext } from '@context/AppContext';
 export default function PlansList({ plans, planSelection, handleProductSelection }) {
     const { list } = plans || services;
     const { user } = useContext(AppContext);
+    const PLAN_TYPE_FOR_ME = 'forMe';
+    const DISCOUNT_PERCENTAGE = 5;
 
-    const filtered_services = list.map(service => {
+    const isForMe = planSelection.planType === PLAN_TYPE_FOR_ME;
+
+    // sort data to display on cards, and filter services by age 
+    const filtered_services = list?.map(service => {
         const newData = {
             title: service.name,
             amount: service.price,
             services: service.description,
             age: service.age,
-            discountPercentage: planSelection.forMe ? false : 5, 
-            recommended :  planSelection.forMe ? false : service.age <= user.age
+            discountPercentage: isForMe ? false : DISCOUNT_PERCENTAGE, 
+            recommended : isForMe ? false : service.age <= user.age
         }
         return newData
-    }).filter(service => {
-        if(planSelection.forMe) {
+    })?.filter(service => {
+        if(isForMe) {
             return service.age <= user.age
         }
         return true
@@ -36,14 +41,13 @@ export default function PlansList({ plans, planSelection, handleProductSelection
         <div className='plans-steps__list'>
             <Swiper
                 modules={[Navigation, Pagination]}
-                effect="fade"
                 spaceBetween={0}
                 navigation={{
                     nextEl: '.swiper_custom_controls__next',
                     prevEl: '.swiper_custom_controls__prev'
                 }}
                 slidesPerView={1}
-                initialSlide={1}
+                initialSlide={0}
                 pagination={{
                     type: 'fraction',
                     el: '.swiper-pagination',
@@ -64,7 +68,7 @@ export default function PlansList({ plans, planSelection, handleProductSelection
                     <SwiperSlide key={index}>
                         <ProductCard 
                             product={service}
-                            image={index % 2 ? 'img/house.svg' : 'img/hospital.svg'}
+                            image={index % 2 ? '/img/house.svg' : '/img/hospital.svg'}
                             onClick={() => handleProductSelection(service)}
                         />
                     </SwiperSlide>

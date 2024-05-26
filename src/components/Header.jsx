@@ -17,11 +17,14 @@ export default function Header() {
                 
                 <nav className='header__nav'>
                     <div className='header__nav__item header__nav__item--desktop'>
-                        <a className='header__nav__link'>¡Compra por este medio!</a>
+                        <a className='header__nav__link'>
+                            <span>¡Compra por este medio!</span>
+                        </a>
                     </div>
                     <div className='header__nav__item'>
                         <a className='header__nav__link header__nav__link--primary' href="tel:(01) 411 6001">
-                        <PhoneIcon width={20} height={20} /> (01) 411 6001
+                        <PhoneIcon /> 
+                        (01) 411 6001
                         </a>
                     </div>
                 </nav>

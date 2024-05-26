@@ -33,18 +33,26 @@
             font-weight: 500;
             color: var(--color-dark);
             text-decoration: inherit;
-            display: flex;
-            gap: toRem(8);
-            font-size: toRem(16);
-            line-height: toRem(20);
-            letter-spacing: 0.4px;
+            display: inline-block;
+
+            span {
+                vertical-align: text-top;
+            }
+
+            &--primary {
+                font-size: toRem(16);
+                line-height: toRem(20);
+                letter-spacing: toRem(0.4);
+                font-weight: bold;
+            }
 
             &:hover {
                 color: var(--color-dark-blue);
             }
 
-            &--primary {
-                font-weight: bold;
+            svg {
+                vertical-align: text-bottom;
+                margin-right: toRem(8);
             }
         }
     }
@@ -62,6 +70,33 @@
                     display: block;
                 }
             }
+
+            &__link {
+                font-size: toRem(12);
+                line-height: toRem(16);
+                letter-spacing: toRem(0.2);
+                font-weight: 600;
+
+                &--primary {
+                    font-size: toRem(18);
+                }
+    
+                &:hover {
+                    color: var(--color-dark-blue);
+                }
+    
+                &--primary {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1142px) {
+    .header {
+        &__wrapper {
+            padding: toRem(14) 0;
         }
     }
 }

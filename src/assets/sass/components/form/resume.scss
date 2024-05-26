@@ -1,0 +1,108 @@
+.resume {
+    color: var(--color-dark-blue);
+
+    &__title {
+        font-size: toRem(32);
+        line-height: toRem(40);
+        letter-spacing: toRem(-0.6);
+        font-weight: 700;
+        margin-bottom: toRem(40);
+        margin-top: 0;
+        padding: 0 toRem(20);
+    }
+
+    &__header {
+        display: grid;
+        gap: toRem(8);
+
+        &__subtitle {
+            margin: 0;
+            font-weight: 900;
+            font-size: toRem(10);
+            line-height: toRem(16);
+            letter-spacing: toRem(0.8);
+            text-transform: uppercase;
+        }
+
+        &__title {
+            margin: 0;
+            font-weight: 700;
+            font-size: toRem(20);
+            line-height: toRem(28);
+            letter-spacing: toRem(-0.2);
+
+            svg {
+                margin-right: toRem(12);
+            }
+        }
+
+        * {
+            vertical-align: middle;
+        }
+    }
+
+    &__block {
+        display: grid;
+        gap: toRem(4);
+
+        &__title {
+            font-size: toRem(16);
+            line-height: toRem(24);
+            font-weight: 700;
+            letter-spacing: toRem(0.2);
+            margin: 0;
+        }
+
+        &__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: toRem(4);
+        }
+
+        &__item {
+            font-size: toRem(14);
+            line-height: toRem(24);
+            letter-spacing: toRem(0.1);
+            font-weight: 400;
+
+            .line-through {
+                text-decoration: line-through;
+                font-size: 85%;
+                font-weight: 400;
+                opacity: 0.7;
+            }
+        }
+    }
+
+    &__box {
+        padding: toRem(24) toRem(32);
+        gap: toRem(16);
+        display: grid;
+        background: var(--color-white);
+        border-radius: toRem(24);
+        box-shadow: var(--shadow-box);
+    }
+
+    &__separator {
+        margin: 0;
+        height: toRem(1);
+        border: unset;
+        background: var(--color-white-blue-2);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .resume {
+        margin-top: toRem(32);
+
+        &__title {
+            font-size: toRem(40);
+            margin-bottom: toRem(48);
+            line-height: toRem(48);
+            padding: 0 ;
+        }
+    }
+    
+}

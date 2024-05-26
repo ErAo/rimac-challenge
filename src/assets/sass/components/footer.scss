@@ -22,13 +22,13 @@
             font-weight: 400;
             font-size: toRem(12);
             line-height: toRem(20);
-            letter-spacing: 0.1px;
+            letter-spacing: toRem(0.1);
         }
     }
 
     &__separator {
         margin: toRem(24) 0;
-        height: 1px;
+        height: toRem(1);
         background: var(--color-gray-dark-blue);
         border: none;
         width: 100%;
@@ -75,6 +75,14 @@
                     height: toRem(42);
                 }
             }
+        }
+    }
+}
+
+@media screen and (min-width: 1142px){
+    .footer {
+        &__wrapper {
+            padding: 0 toRem(24);
         }
     }
 }

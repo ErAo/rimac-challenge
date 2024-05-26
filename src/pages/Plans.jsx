@@ -12,47 +12,67 @@ import StepsHeader from '@components/form/steps/StepsHeader';
 import Loader from '@components/element/Loader';
 
 export default function Plans() {
-    const [ isLoading, setIsLoading ] = useState(true)
-    const { setUser, user, ageByDate, setStep, step } = useContext(AppContext);
-    const { getItem } = useStorage()
+    const [ loading, setLoading ] = useState(true);
+    const { 
+        setUser, 
+        user, 
+        ageByDate,
+        setStep, 
+        step,
+        stepLoading
+    } = useContext(AppContext);
+    const { getItem, KEYS, setItem, clear: clearStorage } = useStorage()
+    const { FORM_QUOTE, PLAN_SELECTION } = KEYS
+    const plan_selection = getItem(PLAN_SELECTION)
+    const hasResume = plan_selection && plan_selection.product
+    const currentStep = plan_selection?.step;
 
     const navigate = useNavigate();
 
-    const handlePrevStep = () => {
-        if(step > 1) return setStep(step - 1)
-        else navigate('/')
+    // control steps navigation
+    const changeStep = (newStep) => {
+        if(newStep === step) return
+
+        setItem(PLAN_SELECTION, {
+            ...plan_selection,
+            step: newStep
+        })
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+
+        setStep(newStep)
     }
 
     const handleButtonBack = (e) => {
         e.preventDefault()
-        handlePrevStep()
+        if(step > 1) {
+            return changeStep(step - 1)
+        } else {
+            navigate('/')
+        }
     }
 
     const handleStep = (newStep) => {
-        const plan_selection = getItem('plan_selection')
-        const hasResume = plan_selection && plan_selection.product
         if(newStep <= step || hasResume){
-            setStep(newStep)
+            changeStep(newStep)
         }
     }
 
-    const steps = [
-        {
-            step: 1, 
-            active: step === 1, 
-            handle: handleStep, 
-            text: 'Planes y coberturas'
-        },
-        {
-            step: 2, 
-            active: step === 2, 
-            handle: handleStep, 
-            text: 'Resumen'
+    const checkStep = () => {
+        if(currentStep) {
+            setStep(currentStep)
+        }else if(hasResume) {
+            setStep(2)
+        }else  {
+            setStep(1)
         }
-    ]
-
+    }
+    // Validate if user has been set and form quote is saved
     useEffect(() => {
-        const form_quote = getItem('form_quote')
+        const form_quote = getItem(FORM_QUOTE)
         if(!user && !form_quote){
             navigate('/')
         }
@@ -65,21 +85,39 @@ export default function Plans() {
                         ...form_quote,
                         age: ageByDate(response.birthDay)
                     })
-                    setIsLoading(false)
+                    checkStep()
+                    setLoading(false)
                 }
             })
+        }else {
+            checkStep()
+            setLoading(false)
         }
-
-        if(user && form_quote){
-            setIsLoading(false)
-        }
-
     }, [])
+
+    // step list
+    const steps = [
+        {
+            id: 1,
+            step: 1, 
+            active: step === 1, 
+            handle: handleStep, 
+            text: 'Planes y coberturas'
+        },
+        {
+            id: 2,
+            step: 2, 
+            active: step === 2, 
+            handle: handleStep, 
+            text: 'Resumen'
+        }
+    ]
 
     return (
         <Layout gradients={false} footer={false}>
+            {stepLoading && <Loader />}
             {
-                isLoading ? <Loader /> : (
+                loading ? <Loader /> : (
                     <>
                         <StepsHeader 
                             handleButton={handleButtonBack}

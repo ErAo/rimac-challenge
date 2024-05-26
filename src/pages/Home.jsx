@@ -9,11 +9,13 @@ export default function Home() {
             <div className="container">
                 <div className="home-form">
                     <div className="home-form__header">
-                        <span className='tag tag--gradient home-form__subtitle'>Seguro Salud Flexible</span>
+                        <p className='tag tag--gradient home-form__subtitle'>
+                            <span>Seguro Salud Flexible</span>
+                        </p>
                         <h1 className='home-form__title'>Creado para ti y tu familia</h1>
                     </div>
                     <div className="home-form__img">
-                        <Img src="img/home-img-mobile.png" breakpoints={
+                        <Img src="/img/home-img-mobile.png" breakpoints={
                             [
                                 { minWidth: 768, src: '/img/home-img.png' }
                             ]

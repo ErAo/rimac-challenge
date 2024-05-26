@@ -12,7 +12,7 @@ export default function HomeForm() {
     const { setUser, ageByDate } = useContext(AppContext);
     let navigate = useNavigate();
     const [formData, setFormData] = useState({})
-    const { setItem } = useStorage()
+    const { setItem, KEYS } = useStorage()
     const {
         register,
         handleSubmit,
@@ -20,13 +20,9 @@ export default function HomeForm() {
         formState: { errors },
     } = useForm(formData);
 
-    // watch field input
-    const watchDocumentType = watch("documentType", "dni")
-
-    // handle error class
+    // handle errors
     const hasError = (field) => errors[field] ? ' form__control--error' : ''
 
-    // handle error message
     const handleError = (error) => {
         const errorKey = Object.keys(error)[0]
         const errorValue = error[errorKey]
@@ -36,11 +32,10 @@ export default function HomeForm() {
     // handle form submit event
     const onSubmitForm = (data) => {
         setFormData({...data})
-        setItem('form_quote', data)
+        setItem(KEYS.FORM_QUOTE, data)
         
         DB('user').get().then((response) => {
             if(!response.error) {
-
                 setUser({
                     ...response,
                     ...data,
@@ -51,7 +46,8 @@ export default function HomeForm() {
         })
     }
 
-    // check document type selection
+    // check document type value
+    const watchDocumentType = watch("documentType", "dni")
     const DNISelected = watchDocumentType === 'dni'
 
     // inputs validations
@@ -78,6 +74,10 @@ export default function HomeForm() {
         minLength: {
             value: 9,
             message: 'El número de celular debe tener al menos 9 caracteres'
+        },
+        pattern: {
+            value: /^[0-9]{9}$/,
+            message: 'El número de celular no es válido'
         }
     }
 
@@ -105,7 +105,7 @@ export default function HomeForm() {
                         <span className="form__control__label">Nro. de documento</span>
                         <input 
                             placeholder={DNISelected ? '00000000' : '11000000001'} 
-                            className="form__control__field" 
+                            className="form__control__field"
                             type="text" 
                             {...register("documentNumber", documentNumberValidation)} />
                     </label>

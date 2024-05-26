@@ -24,6 +24,11 @@
     position: relative;
     z-index: 2;
 
+    * {
+        font-family: var(--font-br-sonoma);
+        vertical-align: text-top;
+    }
+
     &__img {
         grid-column: 2 / -1;
 
@@ -34,7 +39,7 @@
 
     &__header {
         grid-column: 1;
-        padding-right: 12px;    
+        padding-right: toRem(12);    
         display: flex;   
         flex-direction: column;
         justify-content: center;
@@ -49,7 +54,7 @@
     }
 
     &__separator {
-        height: 1px;
+        height: toRem(1);
         background: var(--color-gray);
         border: none;
         width: 100%;
@@ -62,6 +67,7 @@
         line-height: toRem(36);
         font-weight: 700;
         margin-top: 0;
+        margin-bottom: 0;
     }
 
     &__subtitle {
@@ -73,7 +79,7 @@
         margin-top: 0;
         font-size: toRem(14);
         line-height: toRem(20);
-        letter-spacing: 0.2px;
+        letter-spacing: toRem(0.2);
         font-weight: 600;
         margin-bottom: toRem(24);
     }
@@ -81,7 +87,7 @@
 
 @media screen and (max-width: 370px) {
     .home-form {
-        grid-template-columns: auto minmax(toRem(100), 40%);
+        grid-template-columns: auto minmax(toRem(90), 40%);
 
         &__title {
             font-size: toRem(23);
@@ -100,7 +106,7 @@
 @media screen and (min-width: 768px) {
     .left-blur, 
     .right-blur {
-        max-width: 432px;
+        max-width: toRem(432);
         width: auto;
     }
 
@@ -117,12 +123,13 @@
     }
 
     .home-form {
-        grid-template-columns: 45% auto;
+        grid-template-columns: 45% toRem(352);
         column-gap: toRem(64);
 
         &__title {
             font-size: toRem(32);
             line-height: toRem(40);
+            margin-bottom: toRem(8);
         }
 
         &__separator {
@@ -152,12 +159,13 @@
 
 @media screen and (min-width: 991px) {
     .home-form {
-        grid-template-columns: toRem(480) auto;
+        grid-template-columns: toRem(480) toRem(352);
     }
 }
 
-@media screen and (min-width: 1120px) {
+@media screen and (min-width: 1142px) {
     .home-form {
+        padding: toRem(32) 0;  
         column-gap: toRem(128);
 
         &__img {

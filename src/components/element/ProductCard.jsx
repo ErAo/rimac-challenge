@@ -11,6 +11,7 @@ export default function ProductCard({product, onClick, image}) {
         recommended
     } = product;
 
+    // Calculate the discount
     const calcDiscount = (amount) => {
         if (!discountPercentage) return amount;
         return amount - (amount * discountPercentage / 100);
@@ -58,7 +59,7 @@ export default function ProductCard({product, onClick, image}) {
                         {services?.map((service, index) => (
                             <li key={index} className="product-card__services__service">
                                 <span className={`product-card__services__service_icon`} style={
-                                    {'--service-icon': `url('img/checked-black.svg')`}
+                                    {'--service-icon': `url('/img/checked-black.svg')`}
                                 }></span>
                                 <span className='product-card__services__service_text'>
                                 {service}

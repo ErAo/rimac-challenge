@@ -1,6 +1,6 @@
 .option-card {
     padding: toRem(16) toRem(24) toRem(40) toRem(24);
-    border: 3px solid transparent;
+    border: toRem(3) solid transparent;
     box-shadow: var(--shadow-card);
     background: var(--color-white);
     border-radius: toRem(24);
