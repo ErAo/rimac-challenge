@@ -43,7 +43,7 @@ $lato : 'lato';
     font-family: $lato;
     src: url('fonts/#{$lato}/Lato-Bold.woff2') format('woff2'),
         url('fonts/#{$lato}/Lato-Bold.woff') format('woff');
-    font-weight: bold;
+    font-weight: 700;
     font-style: normal;
 }
 
@@ -51,7 +51,7 @@ $lato : 'lato';
     font-family: $lato;
     src: url('fonts/#{$lato}/Lato-BoldItalic.woff2') format('woff2'),
         url('fonts/#{$lato}/Lato-BoldItalic.woff') format('woff');
-    font-weight: bold;
+    font-weight: 700;
     font-style: italic;
 }
 

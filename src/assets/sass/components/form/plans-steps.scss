@@ -1,0 +1,169 @@
+.plans-steps {
+    padding: toRem(32) toRem(24) 0;
+
+    &__type {
+        margin-bottom: toRem(40);
+    }
+
+    &__button {
+        margin-bottom: toRem(56);
+        display: none;
+    }
+
+    &__header {
+        color: var(--color-dark-blue);
+        margin-bottom: toRem(32);
+
+        &__title {
+            font-size: toRem(28);
+            line-height: toRem(36);
+            font-weight: 700;
+            letter-spacing: toRem(-0.2);
+            margin: 0 0 toRem(8);
+        }
+
+        &__description {
+            font-size: toRem(16);
+            line-height: toRem(28);
+            font-weight: 400;
+            letter-spacing: toRem(0.1);
+            margin: 0;
+        }
+    }
+
+    &__options {
+        display: flex;
+        gap: toRem(24);
+        flex-direction: column;
+    }
+
+    // Services list
+
+    &__list {
+        .swiper {
+            overflow: visible;
+
+            &-wrapper {
+                margin-bottom: toRem(68);
+            }
+
+            &-slide {
+                padding: 0 toRem(8);
+                height: auto;
+                display: flex;
+            }
+
+            &-pagination {
+                font-size: toRem(16);
+                line-height: toRem(24);
+                font-weight: 400;
+                letter-spacing: toRem(0.2);
+                margin: 0;
+
+                &.swiper-pagination-lock {
+                    display: none;
+                }
+            }
+
+            &_custom_controls {
+                display: flex;
+                gap: toRem(16);
+                justify-content: center;
+                align-items: center;
+                margin-bottom: toRem(56);
+
+                button {
+                    background: transparent;
+                    border: none;
+                    padding: 0;
+                    cursor: pointer;
+
+
+
+                    svg {
+                        circle {
+                            stroke: var(--color-blue);
+                        }
+
+                        path {
+                            fill: var(--color-blue);
+                        }
+                    }
+
+                    &.swiper-button-disabled {
+                        cursor: not-allowed;
+
+                        svg {
+                            circle {
+                                stroke: var(--color-gray-blue);
+                            }
+    
+                            path {
+                                fill: var(--color-gray-blue);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 361px) {
+    .plans-steps {
+        &__list {
+            padding: 0 toRem(8);
+    
+            .swiper {
+                &-slide {
+                    padding: 0 toRem(16);
+                }
+            }
+        }
+    }    
+}
+
+@media screen and (min-width: 768px) {
+    .plans-steps {
+        padding: toRem(32) toRem(24) 0;
+
+        &__type {
+            margin-bottom: toRem(20);
+        }
+
+        &__button {
+            margin-bottom: toRem(56);
+            display: flex;
+        }
+
+        &__header {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: toRem(544);
+
+            &__title {
+                font-size: toRem(40);
+                line-height: toRem(48);
+                letter-spacing: toRem(-0.6);
+            }
+
+            &__description {
+                margin: 0;
+            }
+        }
+
+        &__options {
+            gap: toRem(32);
+            max-width: toRem(544);
+            flex-direction: row;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+
+            .option-card {
+                width: 50%;
+            }
+        }
+    }
+}

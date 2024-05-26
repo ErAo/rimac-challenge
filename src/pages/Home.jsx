@@ -1,10 +1,11 @@
 import Img from '@components/element/Img';
 import '@assets/sass/pages/home.scss';
 import HomeForm from '@components/form/HomeForm';
+import Layout from '@layouts/Layout';
 
 export default function Home() {
     return (
-        <>
+        <Layout>
             <div className="container">
                 <div className="home-form">
                     <div className="home-form__header">
@@ -29,6 +30,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }

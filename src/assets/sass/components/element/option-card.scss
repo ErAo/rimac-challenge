@@ -1,0 +1,99 @@
+.option-card {
+    padding: toRem(16) toRem(24) toRem(40) toRem(24);
+    border: 3px solid transparent;
+    box-shadow: var(--shadow-card);
+    background: var(--color-white);
+    border-radius: toRem(24);
+    cursor: pointer;
+    transition: 0.4s;
+
+    &:hover {
+        scale: 1.02;
+    }
+
+    &.active {
+        border-color: var(--color-dark-blue);
+        
+        .option-card__marker__circle {
+            border-color: var(--color-dark-green);
+            background: var(--color-dark-green);
+
+            svg {
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+            scale: 1;
+        }
+    }
+
+
+    &__marker {
+        &__circle {
+            width: toRem(24);
+            height: toRem(24);
+            border: toRem(1) solid var(--color-gray-blue-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+
+            svg {
+                opacity: 0;
+            }
+        }
+    }
+
+    &__title {
+        margin-bottom: toRem(8);
+        display: flex;
+        align-items: center;
+
+        &_img {
+            flex: none;
+            margin-right: toRem(8);
+
+            img {
+                width: toRem(32);
+            }
+        }
+
+        &_text {
+            font-size: toRem(20);
+            line-height: toRem(28);
+            font-weight: 900;
+            letter-spacing: toRem(-0.2);
+            color: var(--color-dark-blue);
+            margin: 0;
+        }
+    }
+
+    &__description {
+        &_text {
+            margin: 0;
+            font-size: toRem(12);
+            line-height: toRem(20);
+            font-weight: 400;
+            letter-spacing: toRem(0.2);
+            color: var(--color-dark-blue);
+        }
+    }
+}
+
+@media screen and (min-width: 768px){
+    .option-card {
+        &__title {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+    
+            &_img {
+                img {
+                    width: toRem(48);
+                }
+            }
+        }
+    }
+}

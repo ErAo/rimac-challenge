@@ -1,33 +1,25 @@
-import { useState } from 'react';
-
 export default function useStorage() {
-    const [storage, setStorage] = useState(localStorage);
-
     const setItem = (key, value) => {
-        setStorage((prev) => {
-            prev.setItem(key, value);
-            return prev;
-        });
+        localStorage.setItem(key, JSON.stringify(value));
     }
 
-    const getItem = (key) => storage.getItem(key);
+    const getItem = (key) => {
+        try {
+            return JSON.parse(localStorage.getItem(key));
+        } catch (error) {
+            return localStorage.getItem(key);
+        }
+    };
 
     const removeItem = (key) => {
-        setStorage((prev) => {
-            prev.removeItem(key);
-            return prev;
-        });
+        localStorage.removeItem(key);
     }
 
     const clear = () => {
-        setStorage((prev) => {
-            prev.clear();
-            return prev;
-        });
+        localStorage.clear();
     }
 
     return {
-        storage,
         setItem,
         getItem,
         removeItem,

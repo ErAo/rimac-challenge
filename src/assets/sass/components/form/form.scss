@@ -103,6 +103,10 @@
         line-height: toRem(24);
         color: var(--color-dark-blue-2);
 
+        &.form__control--error {
+            color: var(--color-red);
+        }
+
         cursor: pointer;
 
         &__field {

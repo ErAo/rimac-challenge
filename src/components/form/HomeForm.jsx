@@ -1,9 +1,18 @@
 import { useState } from "react"
 import '@assets/sass/components/form/form.scss'
 import { useForm } from "react-hook-form"
+import useStorage from "@hooks/useStorage"
+import { useNavigate } from "react-router-dom"
+import { DB } from '@lib/database'
+
+import { useContext } from "react"
+import { AppContext } from "@context/AppContext"
 
 export default function HomeForm() {
+    const { setUser, ageByDate } = useContext(AppContext);
+    let navigate = useNavigate();
     const [formData, setFormData] = useState({})
+    const { setItem } = useStorage()
     const {
         register,
         handleSubmit,
@@ -27,6 +36,19 @@ export default function HomeForm() {
     // handle form submit event
     const onSubmitForm = (data) => {
         setFormData({...data})
+        setItem('form_quote', data)
+        
+        DB('user').get().then((response) => {
+            if(!response.error) {
+
+                setUser({
+                    ...response,
+                    ...data,
+                    age: ageByDate(response.birthDay)
+                })
+                navigate('/plans')
+            }
+        })
     }
 
     // check document type selection
@@ -43,7 +65,7 @@ export default function HomeForm() {
             message: `El documento debe tener al menos ${DNISelected ? 8 : 11} caracteres`
         },
         pattern: {
-            value: DNISelected ? /^[0-9]{8}$/ : /^[0-9]{2} [0-9]{8} [0-9]{1}$/,
+            value: DNISelected ? /^[0-9]{8}$/ : /^[0-9]{2}[0-9]{8}[0-9]{1}$/,
             message: 'El documento no es válido'
         }
     }
@@ -56,6 +78,13 @@ export default function HomeForm() {
         minLength: {
             value: 9,
             message: 'El número de celular debe tener al menos 9 caracteres'
+        }
+    }
+
+    const legalsValidation = {
+        required: {
+            value: true,
+            message: 'Debes aceptar los términos y condiciones'
         }
     }
 
@@ -75,7 +104,7 @@ export default function HomeForm() {
                     <label>
                         <span className="form__control__label">Nro. de documento</span>
                         <input 
-                            placeholder={DNISelected ? '00000000' : '00 00000000 0'} 
+                            placeholder={DNISelected ? '00000000' : '11000000001'} 
                             className="form__control__field" 
                             type="text" 
                             {...register("documentNumber", documentNumberValidation)} />
@@ -95,9 +124,9 @@ export default function HomeForm() {
             </div>
 
             <div className="form__legals">
-                <label className="form__selector">
+                <label className={`form__selector${hasError('legals_privacy')}`}>
                     <input 
-                        {...register('legals__privacy')}  
+                        {...register('legals_privacy', legalsValidation)}  
                         className="form__selector__field" 
                         type="checkbox" 
                         placeholder="999333555"/>
@@ -105,9 +134,9 @@ export default function HomeForm() {
                     Acepto lo Política de Privacidad
                 </label>
 
-                <label className="form__selector">
+                <label className={`form__selector${hasError('legals_campaigns')}`}>
                     <input 
-                        {...register('legals__campaigns')}  
+                        {...register('legals_campaigns', legalsValidation)}  
                         className="form__selector__field" 
                         type="checkbox" 
                         placeholder="999333555"/>

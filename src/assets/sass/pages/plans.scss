@@ -1,0 +1,27 @@
+.button-back {
+    --color: var(--color-blue);
+    padding: 0;
+    background: 0;
+    border: none;
+    display: flex;
+    gap: toRem(8);
+    align-items: center;
+    font-size: toRem(16);
+    line-height: toRem(24);
+    letter-spacing: toRem(0.2);
+    font-weight: 700;
+    color: var(--color);
+    cursor: pointer;
+
+    svg {
+        flex: none;
+
+        circle {
+            stroke: var(--color);
+        }
+
+        path {
+            fill: var(--color);
+        }
+    }
+}
