@@ -1,3 +1,4 @@
+import  { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -12,6 +13,7 @@ import { useContext } from 'react';
 import { AppContext } from '@context/AppContext';
 
 export default function PlansList({ plans, planSelection, handleProductSelection }) {
+    const [ isMobile, setIsMobile ] = useState(false);
     const { list } = plans || services;
     const { user } = useContext(AppContext);
     const PLAN_TYPE_FOR_ME = 'forMe';
@@ -37,11 +39,26 @@ export default function PlansList({ plans, planSelection, handleProductSelection
         return true
     });
 
+    const handleSwiperResize = () => {
+        if(window.innerWidth < 1024) {
+            setIsMobile(true)
+        }else {
+            setIsMobile(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleSwiperResize)
+        handleSwiperResize()
+        return () => {
+            window.removeEventListener('resize', handleSwiperResize)
+        }
+    }, [])
+
     return (
-        <div className='plans-steps__list'>
-            <Swiper
+        <div className={`plans-steps__list${!isMobile ? ' plans-steps__list--desktop' : ''}`}>
+            {isMobile ? <Swiper
                 modules={[Navigation, Pagination]}
-                spaceBetween={0}
                 navigation={{
                     nextEl: '.swiper_custom_controls__next',
                     prevEl: '.swiper_custom_controls__prev'
@@ -52,7 +69,6 @@ export default function PlansList({ plans, planSelection, handleProductSelection
                     type: 'fraction',
                     el: '.swiper-pagination',
                 }}
-                centeredSlides={true}
                 breakpoints={
                     {
                         768: {
@@ -83,7 +99,15 @@ export default function PlansList({ plans, planSelection, handleProductSelection
                         <ChevronRight width={32} height={32} />
                     </button>
                 </div>
-            </Swiper>
+            </Swiper> 
+            : filtered_services.map((service, index) => (
+                <ProductCard 
+                    key={index}
+                    product={service}
+                    image={index % 2 ? '/img/house.svg' : '/img/hospital.svg'}
+                    onClick={() => handleProductSelection(service)}
+                />
+            ))}
         </div>
     )
 }

@@ -75,9 +75,13 @@ picture {
         line-height: toRem(16);
         font-weight: 700;
         letter-spacing: toRem(0.4);
-        padding: toRem(4) toRem(8);
+        padding: toRem(2) toRem(8);
         border-radius: toRem(4);
         background: linear-gradient(90deg, var(--color-light-blue) 0%, var(--color-green) 100%);
+
+        span {
+            vertical-align: unset;
+        }
     }
 }
 
@@ -102,6 +106,17 @@ picture {
     }
 }
 
+::-webkit-scrollbar {
+    width: toRem(4);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-dark);
+    opacity: 0.8;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -119,6 +134,7 @@ picture {
     .tag {
         &--gradient {
             font-size: toRem(14);
+            padding: toRem(4) toRem(8);
         }
     }    
 }

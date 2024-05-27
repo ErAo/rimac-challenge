@@ -1,0 +1,76 @@
+.dropdown {
+    position: relative;
+    display: block;
+    font-size: toRem(16);
+    line-height: toRem(24);
+    z-index: 2;
+
+    &__selected {
+        border: none;
+        outline: none;
+        width: 100%;
+        color: var(--color-dark);
+        background: transparent;
+        height: 100%;
+        padding: 1rem;
+        appearance: none;
+        cursor: pointer;
+
+        &::after {
+            content: url(/img/select-arrow.svg);
+            border-right: 0;
+            border-top: 0;
+            display: block;
+            pointer-events: none;
+            position: absolute;
+            right: toRem(16);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    &__option {
+        padding: toRem(16) toRem(24);
+        cursor: pointer;
+        transition: 0.3s;
+        color: var(--color-dark);
+        background: #fff;
+        border: none;
+        outline: none;
+        width: 100%;
+        text-align: left;
+
+        input {
+            display: none;
+        }
+
+        &:hover {
+            background: var(--color-light);
+        }
+
+        &--selected {
+            background: var(--color-light);
+        }
+    }
+
+    &__drop {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        background: #fff;
+        border-radius: inherit;
+        overflow: hidden;
+        transition: 0.3s;
+        max-height: 200px;
+        transform: scaleY(0);
+        top: 100%;
+        transform-origin: top;
+        display: grid;
+        overflow: hidden auto;
+
+        &--active {
+            transform: scaleY(1);
+        }
+        
+    }
+}

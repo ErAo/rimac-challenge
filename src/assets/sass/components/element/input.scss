@@ -1,0 +1,48 @@
+.input-text {
+    &__label {
+        font-size: toRem(12);
+        line-height: toRem(16);
+        margin: 0;
+        display: block;
+        position: relative;
+        cursor: text;
+        color: transparent;
+    
+        &::before {
+            content: attr(data-label);
+            position: absolute;
+            top: 90%;
+            width: 100%;
+            color: var(--label-color, var(--color-dark-gray));
+            font-size: toRem(16);
+            transition: 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    }
+    
+    &__input {
+        border: none;
+        outline: none;
+        width: 100%;
+        font-size: toRem(16);
+        line-height: toRem(24);
+        color: var(--color-dark);
+        background: transparent;
+        padding: 0;
+        opacity: 0;
+        transition: 0.3s;
+    
+        &:focus,
+        &--active {
+            opacity: 1;
+    
+            & ~ .input-text__label {
+                &::before {
+                    top: 0%;
+                    font-size: toRem(12);
+                }
+            }
+        }
+    }
+}

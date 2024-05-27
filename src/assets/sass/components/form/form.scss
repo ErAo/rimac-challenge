@@ -6,11 +6,11 @@
         border-radius: toRem(8);
         display: flex;
         background: var(--color-light);
-        margin-bottom: toRem(16);
 
         .form__control {
             border: none;
             border-radius: inherit;
+            margin-top: 0;
 
             & ~ .form__control {
                 border-left: toRem(1) solid var(--color-dark-gray);
@@ -21,6 +21,7 @@
     }
 
     &__control {
+        margin-top: toRem(16);
         border: toRem(1) solid var(--color-dark-gray);
         border-radius: toRem(8);
         outline: none;
@@ -30,7 +31,9 @@
 
         label {
             padding: toRem(8) toRem(16);
-            display: block;
+            display: flex;
+            position: relative;
+            flex-direction: column-reverse;
         }
 
         &--select {
@@ -52,12 +55,16 @@
 
         &--error {
             color: var(--color-red);
+            --label-color: var(--color-red);
         }
 
         &__label {
             font-size: toRem(12);
             line-height: toRem(16);
             margin: 0;
+            display: block;
+            position: relative;
+            cursor: text;
         }
 
         &__field {
@@ -68,7 +75,7 @@
             line-height: toRem(24);
             color: var(--color-dark);
             background: transparent;
-            
+
             &--select {
                 height: 100%;
                 padding: toRem(16);
@@ -95,59 +102,12 @@
         }
     }
 
-    &__selector {
-        display: flex;
-        gap: toRem(12);
-        align-items: center;
-        font-size: toRem(14);
-        line-height: toRem(24);
-        letter-spacing: toRem(0.2);
-        color: var(--color-dark-blue-2);
-
-        &.form__control--error {
-            color: var(--color-red);
-        }
-
-        cursor: pointer;
-
-        &__field {
-            display: none;
-        }
-
-        &__field:checked + .form__selector__checkbox {
-            background: var(--color-dark-blue-2);
-            
-            &::after {
-                display: block;
-            }
-        }
-
-        &__checkbox {
-            width: toRem(16);
-            height: toRem(16);
-            border: toRem(1) solid var(--color-dark-gray);
-            padding: toRem(2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: toRem(4);    
-            flex: none;
-
-            &::after {
-                display: none;
-                content: '';
-                height: 90%;
-                width: 90%;
-                background: url(/img/checked.svg) center center / contain no-repeat;
-            }
-        }
-    }
-
     &__errors {
         color: var(--color-red);
         font-size: toRem(12);
         line-height: toRem(16);
         margin: 0;
+        margin-top: toRem(5);
     }
 
     &__button {
@@ -193,17 +153,6 @@
             color: var(--color-dark-gray);
             margin-top: toRem(24);
             margin-bottom: toRem(6);
-        }
-
-        &__selector {
-            font-size: toRem(12);
-            line-height: toRem(20);
-            letter-spacing: toRem(0.1);
-
-            &__checkbox {
-                width: toRem(20);
-                height: toRem(20);
-            }
         }
     }
 }

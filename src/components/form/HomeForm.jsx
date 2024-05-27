@@ -8,6 +8,11 @@ import { DB } from '@lib/database'
 import { useContext } from "react"
 import { AppContext } from "@context/AppContext"
 
+import Input from "@components/element/Input"
+import DropDown from "@components/element/DropDown"
+import InputCheck from "../element/InputCheck"
+import FieldError from "../element/FIeldError"
+
 export default function HomeForm() {
     const { setUser, ageByDate } = useContext(AppContext);
     let navigate = useNavigate();
@@ -17,23 +22,17 @@ export default function HomeForm() {
         register,
         handleSubmit,
         watch,
+        setValue,
         formState: { errors },
     } = useForm(formData);
 
     // handle errors
     const hasError = (field) => errors[field] ? ' form__control--error' : ''
 
-    const handleError = (error) => {
-        const errorKey = Object.keys(error)[0]
-        const errorValue = error[errorKey]
-        return errorValue?.message ? errorValue.message : ''
-    }
-
     // handle form submit event
     const onSubmitForm = (data) => {
         setFormData({...data})
         setItem(KEYS.FORM_QUOTE, data)
-        
         DB('user').get().then((response) => {
             if(!response.error) {
                 setUser({
@@ -93,63 +92,68 @@ export default function HomeForm() {
             
             <div className="form__group">
                 <div className={`form__control${hasError('documentType')}`}>
-                    <div className="form__control--select">
-                        <select {...register('documentType')} className="form__control__field form__control__field--select">
-                            <option value="dni">DNI</option>
-                            <option value="ruc">RUC</option>
-                        </select>
-                    </div>
+                    <DropDown 
+                        options={[
+                            {name: 'DNI', value: 'dni'},
+                            {name: 'RUC', value: 'ruc'},
+                        ]}
+                        name="documentType"
+                        updateValue={setValue}
+                        validation={{}}
+                        register={register}
+                        defaultValue="dni"
+                    />
                 </div>
                 <div className={`form__control${hasError('documentNumber')}`}>
-                    <label>
-                        <span className="form__control__label">Nro. de documento</span>
-                        <input 
-                            placeholder={DNISelected ? '00000000' : '11000000001'} 
-                            className="form__control__field"
-                            type="text" 
-                            {...register("documentNumber", documentNumberValidation)} />
-                    </label>
+                    <Input 
+                        label="Nro. de documento"
+                        placeholder={DNISelected ? 'Ejem: 12345678' : 'Ejem: 0012345680'} 
+                        type="text"
+                        inputMode="numeric"
+                        name="documentNumber"
+                        updateValue={setValue}
+                        validation={documentNumberValidation}
+                        register={register} />
                 </div>
             </div>
 
+            <FieldError errors={errors} name="documentNumber" />
+
             <div className={`form__control${hasError('phone')}`}>
-                <label>
-                    <span className="form__control__label">Celular</span>
-                    <input 
-                        placeholder="999333555"
-                        type="tel"
-                        className="form__control__field" 
-                        {...register('phone', phoneValidation)} />
-                </label>
+                <Input 
+                    label="Celular"
+                    placeholder="Ejem: 999333555"
+                    type="tel" 
+                    name="phone"
+                    updateValue={setValue}
+                    inputMode="numeric"
+                    validation={phoneValidation}
+                    register={register} />
             </div>
 
-            <div className="form__legals">
-                <label className={`form__selector${hasError('legals_privacy')}`}>
-                    <input 
-                        {...register('legals_privacy', legalsValidation)}  
-                        className="form__selector__field" 
-                        type="checkbox" 
-                        placeholder="999333555"/>
-                    <span className="form__selector__checkbox"></span>
-                    Acepto lo Política de Privacidad
-                </label>
+            <FieldError errors={errors} name="documentNumber" />
 
-                <label className={`form__selector${hasError('legals_campaigns')}`}>
-                    <input 
-                        {...register('legals_campaigns', legalsValidation)}  
-                        className="form__selector__field" 
-                        type="checkbox" 
-                        placeholder="999333555"/>
-                    <span className="form__selector__checkbox"></span>
-                    Acepto la Política Comunicaciones Comerciales
-                </label>
+            <div className="form__legals">
+                <div className={`form__selector${hasError('legals_privacy')}`}>
+                    <InputCheck 
+                        label='Acepto lo Política de Privacidad'
+                        name={'legals_privacy'}
+                        validation={legalsValidation}
+                        register={register}
+                    />
+                </div>
+
+                <div className={`form__selector${hasError('legals_campaigns')}`}>
+                    <InputCheck 
+                        name={'legals_campaigns'}
+                        validation={legalsValidation}
+                        register={register}
+                        label='Acepto la Política Comunicaciones Comerciales'
+                    />  
+                </div>
 
                 <a href="#" className="form__legals__link">Aplican Términos y Condiciones.</a>
             </div>
-            
-            {errors && <div className="form__errors">
-                {handleError(errors)}
-            </div>}
 
             <button className="form__button">Cotiza aquí</button>
         </form>

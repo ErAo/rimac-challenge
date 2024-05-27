@@ -167,6 +167,23 @@
     }
 }
 
+@media screen and (min-width: 1024px) {
+    .plans-steps {
+        &__list--desktop {
+            padding: 0 0.5rem;
+            display: flex;
+            gap: toRem(32);
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-bottom: toRem(80);
+
+            .product-card {
+                width: calc(100% / 3 - calc(toRem(64) / 3));
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 1142px) {
     .plans-steps {
         padding: toRem(32) 0 0;
