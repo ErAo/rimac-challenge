@@ -131,7 +131,7 @@ export default function HomeForm() {
                     register={register} />
             </div>
 
-            <FieldError errors={errors} name="documentNumber" />
+            <FieldError errors={errors} name="phone" />
 
             <div className="form__legals">
                 <div className={`form__selector${hasError('legals_privacy')}`}>
