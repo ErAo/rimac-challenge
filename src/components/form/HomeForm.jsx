@@ -17,7 +17,7 @@ export default function HomeForm() {
     const { setUser, ageByDate } = useContext(AppContext);
     let navigate = useNavigate();
     const [formData, setFormData] = useState({})
-    const { setItem, KEYS } = useStorage()
+    const { setItem, KEYS, removeItem } = useStorage()
     const {
         register,
         handleSubmit,
@@ -33,6 +33,7 @@ export default function HomeForm() {
     const onSubmitForm = (data) => {
         setFormData({...data})
         setItem(KEYS.FORM_QUOTE, data)
+        removeItem(KEYS.PLAN_SELECTION)
         DB('user').get().then((response) => {
             if(!response.error) {
                 setUser({
