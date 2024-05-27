@@ -67,6 +67,7 @@
         transform-origin: top;
         display: grid;
         overflow: hidden auto;
+        box-shadow: var(--shadow-dropdown);
 
         &--active {
             transform: scaleY(1);
